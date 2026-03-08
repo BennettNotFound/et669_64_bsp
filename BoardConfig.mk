@@ -51,6 +51,9 @@ TARGET_KERNEL_SOURCE := kernel/alps/et669_64_bsp
 TARGET_FORCE_PREBUILT_KERNEL := true
 ifeq ($(TARGET_FORCE_PREBUILT_KERNEL),true)
 TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/kernel
+# 注入他妈的硬件灵魂，救活触摸全靠这俩行！
+BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/odmdtbo.img
+BOARD_INCLUDE_RECOVERY_DTBO := true
 endif
 
 # Partitions
@@ -78,26 +81,28 @@ PLATFORM_SECURITY_PATCH := 2099-12-31
 VENDOR_SECURITY_PATCH := 2099-12-31
 PLATFORM_VERSION := 16.1.0
 
-# TWRP Configuration
-TW_THEME := portrait_hdpi
+# ================= TWRP Configuration =================
+# 强行横屏 + 指定分辨率，治好你的颈椎病！
+TW_THEME := landscape_hdpi
+DEVICE_SCREEN_WIDTH := 1280
+DEVICE_SCREEN_HEIGHT := 720
 TW_SCREEN_BLANK_ON_BOOT := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
 
-# ================= 极限减肥核心 =================
-# 强开 LZMA 压缩，保命神技，体积直接对半砍
+# 强开 LZMA 压缩，有它在 24MB 绝对特么塞得下
 LZMA_RAMDISK_TARGETS := recovery
 
 # 语言设置
 TW_EXTRA_LANGUAGES := true
 TW_DEFAULT_LANGUAGE := zh_CN
 
-# 滚蛋吧垃圾包：把用不上的花里胡哨全特么阉割掉
-TW_EXCLUDE_TWRPAPP := true       # 傻逼官方APP，删
-TW_EXCLUDE_BASH := true          # 留着自带的sh就行，删bash
-TW_EXCLUDE_NANO := true          # 终端文本编辑器，删
-TW_INCLUDE_NTFS_3G := false      # 没卵用的NTFS，删
-TW_INCLUDE_REPACKTOOLS := false  # 内核打包工具，删
-TW_INCLUDE_RESETPROP := false    # 删
-TW_HAS_EDL_MODE := false         # MTK要个屁的EDL，删
-TW_EXCLUDE_APEX := true          # 安卓8没有这玩意，删
-# ================================================
+# 空间够了，把好用的功能给老子加回来！
+TW_USE_TOOLBOX := true
+TW_INCLUDE_NTFS_3G := true
+TW_INCLUDE_RESETPROP := true
+TW_INCLUDE_REPACKTOOLS := true
+
+# 没卵用的纯垃圾继续滚蛋
+TW_EXCLUDE_TWRPAPP := true       # 傻逼官方APP，坚决不要
+TW_HAS_EDL_MODE := false         # MTK要个屁的EDL
+TW_EXCLUDE_APEX := true          # 安卓8没这玩意
