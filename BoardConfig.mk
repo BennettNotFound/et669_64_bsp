@@ -54,7 +54,7 @@ TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/kernel
 
 # 别特么指望 odmdtbo 了，直接把做完手术的超级 dtb 焊在内核屁股上！
 TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb
-BOARD_MKBOOTIMG_ARGS += --dtb $(TARGET_PREBUILT_DTB)
+BOARD_MKBOOTIMG_ARGS += --dt $(TARGET_PREBUILT_DTB)
 endif
 
 # Partitions
