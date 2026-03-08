@@ -80,7 +80,24 @@ PLATFORM_VERSION := 16.1.0
 
 # TWRP Configuration
 TW_THEME := portrait_hdpi
-TW_EXTRA_LANGUAGES := true
 TW_SCREEN_BLANK_ON_BOOT := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
-TW_USE_TOOLBOX := true
+
+# ================= 极限减肥核心 =================
+# 强开 LZMA 压缩，保命神技，体积直接对半砍
+LZMA_RAMDISK_TARGETS := recovery
+
+# 语言设置
+TW_EXTRA_LANGUAGES := true
+TW_DEFAULT_LANGUAGE := zh_CN
+
+# 滚蛋吧垃圾包：把用不上的花里胡哨全特么阉割掉
+TW_EXCLUDE_TWRPAPP := true       # 傻逼官方APP，删
+TW_EXCLUDE_BASH := true          # 留着自带的sh就行，删bash
+TW_EXCLUDE_NANO := true          # 终端文本编辑器，删
+TW_INCLUDE_NTFS_3G := false      # 没卵用的NTFS，删
+TW_INCLUDE_REPACKTOOLS := false  # 内核打包工具，删
+TW_INCLUDE_RESETPROP := false    # 删
+TW_HAS_EDL_MODE := false         # MTK要个屁的EDL，删
+TW_EXCLUDE_APEX := true          # 安卓8没有这玩意，删
+# ================================================
