@@ -86,6 +86,11 @@ PLATFORM_VERSION := 16.1.0
 TW_THEME := landscape_hdpi
 DEVICE_SCREEN_WIDTH := 1280
 DEVICE_SCREEN_HEIGHT := 720
+
+# 核心大招：强制底层物理旋转！把竖过来的画面硬生生掰正！
+# (注：如果刷进去发现画面是倒立的，把 270 改成 90 就行)
+TW_ROTATION := 270
+
 TW_SCREEN_BLANK_ON_BOOT := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
 
