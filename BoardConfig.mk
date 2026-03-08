@@ -51,9 +51,10 @@ TARGET_KERNEL_SOURCE := kernel/alps/et669_64_bsp
 TARGET_FORCE_PREBUILT_KERNEL := true
 ifeq ($(TARGET_FORCE_PREBUILT_KERNEL),true)
 TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/kernel
-# 注入他妈的硬件灵魂，救活触摸全靠这俩行！
-BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/odmdtbo.img
-BOARD_INCLUDE_RECOVERY_DTBO := true
+
+# 别特么指望 odmdtbo 了，直接把做完手术的超级 dtb 焊在内核屁股上！
+TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb
+BOARD_MKBOOTIMG_ARGS += --dtb $(TARGET_PREBUILT_DTB)
 endif
 
 # Partitions
