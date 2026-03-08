@@ -50,11 +50,13 @@ TARGET_KERNEL_SOURCE := kernel/alps/et669_64_bsp
 # Kernel - prebuilt
 TARGET_FORCE_PREBUILT_KERNEL := true
 ifeq ($(TARGET_FORCE_PREBUILT_KERNEL),true)
-TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/kernel
-
-# 别特么指望 odmdtbo 了，直接把做完手术的超级 dtb 焊在内核屁股上！
-TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb
-BOARD_MKBOOTIMG_ARGS += --dt $(TARGET_PREBUILT_DTB)
+    TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/kernel
+    
+    # 使用刚才手术缝合好的“完全体”DTB
+    TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb_perfect.dtb
+    
+    # 强制让打包工具把 DTB 塞进镜像
+    BOARD_MKBOOTIMG_ARGS += --dt $(TARGET_PREBUILT_DTB)
 endif
 
 # Partitions
